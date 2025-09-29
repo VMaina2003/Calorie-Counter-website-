@@ -1,0 +1,10 @@
+asgiref==3.9.2
+certifi==2025.8.3
+cloudinary==1.44.1
+decouple==0.0.7
+Django==5.2.6
+psycopg2==2.9.10
+six==1.17.0
+sqlparse==0.5.3
+tzdata==2025.2
+urllib3==2.5.0
