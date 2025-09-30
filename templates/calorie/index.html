@@ -1,0 +1,40 @@
+{% extends 'calorie/base.html' %}
+
+{% block content %}
+<h1>Calorie Counter</h1>
+<p>Welcome to the Calorie Counter application! Use the navigation links above to add food items and view your calorie intake statistics.</p>
+
+<div class="max-w-3xl mx-auto p-4">
+	<h1 class="text-2xl font-semibold">Today's summary</h1>
+
+	<div class="mt-3 p-4 bg-white rounded shadow">
+		<p class="text-lg">Total calories today: <strong>{{ today_total|default:0 }}</strong></p>
+	</div>
+
+	<h2 class="mt-6 text-xl font-medium">Recent meals</h2>
+	{% if todays_foods %}
+		<ul class="mt-3 space-y-2">
+			{% for food in todays_foods %}
+				<li class="p-3 bg-white rounded shadow-sm flex justify-between">
+					<div>
+						<div class="font-medium">{{ food.name }}</div>
+						<div class="text-sm text-gray-600">{{ food.meal_type|capfirst }} — {{ food.amount }}</div>
+					</div>
+					<div class="text-right">
+						<div class="font-semibold">{{ food.calories }} kcal</div>
+						<div class="text-xs text-gray-500">{{ food.date_added|date:'H:i' }}</div>
+					</div>
+				</li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		<p class="mt-3 text-gray-600">No meals logged for today yet.</p>
+	{% endif %}
+</div>
+
+{% endblock %}
+
+
+
+
+

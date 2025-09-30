@@ -1,0 +1,52 @@
+{% extends 'calorie/base.html' %}
+
+{% block content %}
+<div class="max-w-lg mx-auto p-4">
+    <h1 class="text-2xl font-semibold mb-4">Add Food</h1>
+
+    {% if error %}
+        <div class="text-red-600 mb-3">{{ error }}</div>
+    {% endif %}
+
+    <form method="post" class="space-y-3">
+        {% csrf_token %}
+        <div>
+            <label class="block text-sm font-medium">Name</label>
+            <input class="w-full border rounded p-2" type="text" name="name" id="name" value="{{ name|default:'' }}" required>
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium">Calories</label>
+            <input class="w-full border rounded p-2" type="number" name="calories" id="calories" value="{{ suggested_calories|default:'' }}" required>
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium">Amount (optional)</label>
+            <input class="w-full border rounded p-2" type="text" name="amount" id="amount" value="{{ suggested_amount|default:'' }}">
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium">Meal type</label>
+            <select name="meal_type" class="w-full border rounded p-2">
+                <option value="breakfast" {% if meal_type=='breakfast' %}selected{% endif %}>Breakfast</option>
+                <option value="lunch" {% if meal_type=='lunch' %}selected{% endif %}>Lunch</option>
+                <option value="supper" {% if meal_type=='supper' %}selected{% endif %}>Supper</option>
+                <option value="snack" {% if meal_type=='snack' %}selected{% endif %}>Snack</option>
+            </select>
+        </div>
+
+        <div class="flex gap-2">
+            <button name="action" value="check" class="bg-blue-500 text-white px-4 py-2 rounded">Check</button>
+            <button name="action" value="save" class="bg-green-600 text-white px-4 py-2 rounded">Save</button>
+            <a href="{% url 'calorie_app:index' %}" class="ml-auto text-sm text-gray-600">Cancel</a>
+        </div>
+    </form>
+
+    {% if suggested_calories %}
+        <div class="mt-4 p-3 bg-gray-100 rounded">
+            <strong>Suggestion:</strong> {{ name }} — {{ suggested_calories }} kcal {% if suggested_amount %}({{ suggested_amount }}){% endif %}
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

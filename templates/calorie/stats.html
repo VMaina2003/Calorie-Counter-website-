@@ -1,0 +1,12 @@
+{% extends 'calorie/base.html' %}
+
+{% block content %}
+<h1>Statistics</h1>
+
+<ul>
+    <li>Total calories logged: {{ total_calories }}</li>
+    <li>Number of entries: {{ food_count }}</li>
+    <li>Average calories per entry: {{ average_calories }}</li>
+</ul>
+
+{% endblock %}
